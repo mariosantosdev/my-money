@@ -74,7 +74,7 @@ const ModalNewTransaction: ForwardRefRenderFunction<ModalTransactionHandles> = (
           type="text"
           placeholder="Título"
           value={title}
-          onChange={(e) => setTitle(e.target.validationMessage)}
+          onChange={(e) => setTitle(e.target.value)}
         />
 
         <input
