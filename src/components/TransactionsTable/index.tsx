@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { api } from "../../services/axios";
 
 import { Container } from "./styles";
 
 export function TransactionsTable() {
+  useEffect(() => {
+    api.get("/transactions").then(({ data }) => data);
+  }, []);
   return (
     <Container>
       <table>
