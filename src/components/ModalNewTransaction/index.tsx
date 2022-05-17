@@ -3,7 +3,6 @@ import React, {
   forwardRef,
   ForwardRefRenderFunction,
   useCallback,
-  useContext,
   useImperativeHandle,
   useState,
 } from "react";
@@ -13,7 +12,7 @@ import { Container, RadioBox, TransactionTypeContainer } from "./styles";
 import closeImg from "../../assets/close.svg";
 import incomeImg from "../../assets/income.svg";
 import outcomeImg from "../../assets/outcome.svg";
-import { TransactionContext } from "../../contexts/TransactionContext";
+import { useTransactions } from "../../contexts/TransactionContext";
 
 export interface ModalTransactionHandles {
   openModal: () => void;
@@ -25,7 +24,7 @@ const ModalNewTransaction: ForwardRefRenderFunction<ModalTransactionHandles> = (
   _,
   ref
 ) => {
-  const { createTransaction } = useContext(TransactionContext);
+  const { createTransaction } = useTransactions();
   const [isVisible, setIsVisible] = useState(false);
 
   const [title, setTitle] = useState("");

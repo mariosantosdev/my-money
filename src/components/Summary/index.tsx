@@ -1,13 +1,13 @@
-import React, { useContext, useMemo } from "react";
+import React, { useMemo } from "react";
 
 import { Container } from "./styles";
 import incomeImg from "../../assets/income.svg";
 import outcomeImg from "../../assets/outcome.svg";
 import totalImg from "../../assets/total.svg";
-import { TransactionContext } from "../../contexts/TransactionContext";
+import { useTransactions } from "../../contexts/TransactionContext";
 
 export function Summarry() {
-  const { transactions } = useContext(TransactionContext);
+  const { transactions } = useTransactions();
 
   const { deposits, total, withdraws } = useMemo(() => {
     return transactions.reduce(

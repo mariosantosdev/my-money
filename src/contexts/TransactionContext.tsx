@@ -2,6 +2,7 @@ import React, {
   createContext,
   ReactNode,
   useCallback,
+  useContext,
   useEffect,
   useState,
 } from "react";
@@ -27,7 +28,7 @@ type TransactionProviderProps = {
   children: ReactNode;
 };
 
-export const TransactionContext = createContext({} as TransactionContextProps);
+const TransactionContext = createContext({} as TransactionContextProps);
 
 export function TransactionProvider({ children }: TransactionProviderProps) {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
@@ -53,4 +54,10 @@ export function TransactionProvider({ children }: TransactionProviderProps) {
       {children}
     </TransactionContext.Provider>
   );
+}
+
+export function useTransactions() {
+  const context = useContext(TransactionContext);
+
+  return context;
 }
