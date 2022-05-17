@@ -12,6 +12,7 @@ import { Container, RadioBox, TransactionTypeContainer } from "./styles";
 import closeImg from "../../assets/close.svg";
 import incomeImg from "../../assets/income.svg";
 import outcomeImg from "../../assets/outcome.svg";
+import { api } from "../../services/axios";
 
 export interface ModalTransactionHandles {
   openModal: () => void;
@@ -23,7 +24,7 @@ const ModalNewTransaction: ForwardRefRenderFunction<ModalTransactionHandles> = (
   _,
   ref
 ) => {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
 
   const [title, setTitle] = useState("");
   const [type, setType] = useState("deposit");
@@ -40,8 +41,17 @@ const ModalNewTransaction: ForwardRefRenderFunction<ModalTransactionHandles> = (
 
   useImperativeHandle(ref, () => ({ openModal }));
 
-  const handleCreateTransaction = useCallback((event: FormEvent) => {
+  const handleCreateTransaction = useCallback(async (event: FormEvent) => {
     event.preventDefault();
+
+    const data = {
+      title,
+      type,
+      value,
+      category,
+    };
+
+    api.post("/transactions", data);
   }, []);
 
   if (!isVisible) return null;
