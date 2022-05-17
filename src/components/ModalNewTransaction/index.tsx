@@ -41,18 +41,22 @@ const ModalNewTransaction: ForwardRefRenderFunction<ModalTransactionHandles> = (
 
   useImperativeHandle(ref, () => ({ openModal }));
 
-  const handleCreateTransaction = useCallback(async (event: FormEvent) => {
-    event.preventDefault();
+  const handleCreateTransaction = useCallback(
+    async (event: FormEvent) => {
+      event.preventDefault();
 
-    const data = {
-      title,
-      type,
-      value,
-      category,
-    };
+      const data = {
+        title,
+        type,
+        value,
+        category,
+      };
 
-    api.post("/transactions", data);
-  }, []);
+      api.post("/transactions", data);
+      handleClose();
+    },
+    [title, type, value, category]
+  );
 
   if (!isVisible) return null;
 
