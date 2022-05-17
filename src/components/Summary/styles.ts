@@ -5,6 +5,7 @@ export const Container = styled.div`
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
   margin-top: -10rem;
+  overflow-x: auto;
 
   div {
     background: var(--shape);

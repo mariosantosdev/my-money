@@ -10,8 +10,15 @@ export const Content = styled.div`
 
   padding: 2rem 1rem 12rem;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  gap: 2rem;
+
+  @media (min-width: 640px) {
+    flex-direction: row;
+    gap: 0;
+  }
 
   button {
     font-size: 1rem;
