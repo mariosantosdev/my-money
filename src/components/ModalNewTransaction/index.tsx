@@ -3,6 +3,7 @@ import React, {
   forwardRef,
   ForwardRefRenderFunction,
   useCallback,
+  useContext,
   useImperativeHandle,
   useState,
 } from "react";
@@ -12,7 +13,7 @@ import { Container, RadioBox, TransactionTypeContainer } from "./styles";
 import closeImg from "../../assets/close.svg";
 import incomeImg from "../../assets/income.svg";
 import outcomeImg from "../../assets/outcome.svg";
-import { api } from "../../services/axios";
+import { TransactionContext } from "../../contexts/TransactionContext";
 
 export interface ModalTransactionHandles {
   openModal: () => void;
@@ -24,10 +25,11 @@ const ModalNewTransaction: ForwardRefRenderFunction<ModalTransactionHandles> = (
   _,
   ref
 ) => {
+  const { createTransaction } = useContext(TransactionContext);
   const [isVisible, setIsVisible] = useState(false);
 
   const [title, setTitle] = useState("");
-  const [type, setType] = useState("deposit");
+  const [type, setType] = useState<"deposit" | "withdraw">("deposit");
   const [value, setValue] = useState(0);
   const [category, setCategory] = useState("");
 
@@ -49,14 +51,12 @@ const ModalNewTransaction: ForwardRefRenderFunction<ModalTransactionHandles> = (
     async (event: FormEvent) => {
       event.preventDefault();
 
-      const data = {
+      await createTransaction({
         title,
         type,
         value,
         category,
-      };
-
-      api.post("/transactions", data);
+      });
       handleClose();
     },
     [title, type, value, category]

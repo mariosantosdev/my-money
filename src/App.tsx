@@ -1,14 +1,15 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Dashboard } from "./components/Dashboard";
 import { Header } from "./components/Header";
+import { TransactionProvider } from "./contexts/TransactionContext";
 import { GlobalStyle } from "./styles/global";
 
 export function App() {
   return (
-    <Fragment>
+    <TransactionProvider>
       <Header />
       <Dashboard />
       <GlobalStyle />
-    </Fragment>
+    </TransactionProvider>
   );
 }
