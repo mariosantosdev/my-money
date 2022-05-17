@@ -33,6 +33,10 @@ const ModalNewTransaction: ForwardRefRenderFunction<ModalTransactionHandles> = (
 
   const handleClose = useCallback(() => {
     setIsVisible(false);
+    setTitle("");
+    setType("deposit");
+    setValue(0);
+    setCategory("");
   }, []);
 
   const openModal = useCallback(() => {
